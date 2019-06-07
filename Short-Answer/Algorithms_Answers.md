@@ -71,3 +71,25 @@ The time complexity of this code snippet is O(n) (or O(bunnies), haha). Notably,
       def simplerBunnyEars(bunnies):
           return 2*bunnies
 ```
+
+## Exercise II
+
+Suppose that you have an _n_-story building and plenty of eggs. Suppose also that an egg gets broken if it is thrown off floor _f_ or higher, and doesn't get broken if dropped off a floor less than floor _f_. Devise a strategy to determine the value of _f_ such that the number of dropped eggs is minimized.
+
+Write out your proposed algorithm in plain English or pseudocode and give the runtime complexity of your solution.
+
+#### Answer:
+
+##### Strategy:
+
+I would drop an egg off floor 1 and note if it breaks. If the egg breaks, then _f_ = 1. If the egg doesn't break, I would move up to floor 2 and drop another egg. If the egg breaks, then _f_ = 2. Assuming _f_ <= _n_ and _n_ < infinity, I would keep moving up one floor at a time until an egg breaks and thus the value of _f_ is determined. This solution should only require a single egg to be broken. The runtime complexity is **O(_n_) time complexity** (since I might have to go all the way to the top floor (floor _n_) to determine the value of _f_) and **O(1) space complexity** (since there is no significant increase in memory needed for even a large _n_).
+
+##### Pseudocode:
+
+```
+      def eggbreaker(n):
+          for f in range(1, n + 1):
+              drop egg from floor f
+              if egg breaks:
+                  return f
+```
