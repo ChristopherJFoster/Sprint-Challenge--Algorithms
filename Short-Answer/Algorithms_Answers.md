@@ -78,7 +78,7 @@ Suppose that you have an _n_-story building and plenty of eggs. Suppose also tha
 
 Write out your proposed algorithm in plain English or pseudocode and give the runtime complexity of your solution.
 
-#### Answer:
+#### Answer (to minimize broken eggs):
 
 ##### Strategy:
 
@@ -87,9 +87,38 @@ I would drop an egg off floor 1 and note if it breaks. If the egg breaks, then _
 ##### Pseudocode:
 
 ```
-      def eggbreaker(n):
+      def eggdropper(n):
           for f in range(1, n + 1):
               drop egg from floor f
               if egg breaks:
                   return f
+```
+
+## New answer, now that I understand that the question is asking to minimize the number of dropped eggs:
+
+#### Answer (to minimize dropped eggs):
+
+##### Strategy:
+
+I would drop an egg off the floor that is halfway up the full height of the building. If the egg breaks, I would move down to the floor that is halfway between the floor I was just on and the bottom floor. If the egg doesn't break, I would move up to the floor halfway between the floor I was on and the top floor. Either way, I would drop another egg and move down if it breaks, and up if it doesn't. Each drop eliminates about half of the remaining available floors. Eventually I would find the floor where an egg does not break if dropped, but if dropped from the floor above, the egg does break: this is floor _f_.
+
+My strategy is a binary search. Assuming _f_ <= _n_ and _n_ < infinity, the runtime complexity is **O(log(_n_)) time complexity** (since I eliminate half the floors with each drop) and
+
+**O(1) space complexity** (since there is no significant increase in memory needed for even a large _n_).
+
+##### Pseudocode:
+
+```
+      def eggdropper(building, low=1, high=None):
+          if high == None:
+              high = height(building)
+          while low < high:
+              mid = low + (high - low) // 2
+              drop egg from floor mid:
+                  if egg breaks:
+                      high = mid
+                  else:
+                      low = mid
+          return low
+
 ```
