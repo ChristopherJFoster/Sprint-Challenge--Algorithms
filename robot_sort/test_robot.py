@@ -44,18 +44,22 @@ class Test(unittest.TestCase):
         robot = SortingRobot(self.small_list)
         robot.sort()
         self.assertLess(robot._time, 110)
+        print(robot._time)
 
         robot = SortingRobot(self.medium_list)
         robot.sort()
         self.assertLess(robot._time, 1948)
+        print(robot._time)
 
         robot = SortingRobot(self.large_list)
         robot.sort()
         self.assertLess(robot._time, 27513)
+        print(robot._time)
 
         robot = SortingRobot(self.large_varied_list)
         robot.sort()
         self.assertLess(robot._time, 28308)
+        print(robot._time)
 
 
 if __name__ == '__main__':
